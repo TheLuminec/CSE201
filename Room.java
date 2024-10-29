@@ -13,6 +13,10 @@ public class Room {
         this.options = new ArrayList<Option>();
     }
 
+    public boolean chooseOption(int choose) {
+        return false;
+    }
+
     public void triggerFlag(String flag) {
         flags.add(flag);
     }
