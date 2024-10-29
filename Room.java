@@ -6,6 +6,13 @@ public class Room {
     private String roomName;
     private String roomEnterDescription;
 
+    public Room(String roomName, String roomEnterDescription) {
+        this.roomName = roomName;
+        this.roomEnterDescription = roomEnterDescription;
+        this.flags = new ArrayList<String>();
+        this.options = new ArrayList<Option>();
+    }
+
     public void triggerFlag(String flag) {
         flags.add(flag);
     }
@@ -19,9 +26,11 @@ public class Room {
     }
 
     public void printOptions() {
+        int index = 1;
         for(Option opt : options) {
             if(checkFlags(opt)) {
-                System.out.println(opt);
+                System.out.println("["+index+"]: " + opt);
+                index++;
             }
         }
     }
