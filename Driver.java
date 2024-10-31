@@ -1,9 +1,12 @@
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The main driver class for the text adventure game.
+ * It initializes the game, handles user input, and runs the game loop.
+ */
 public class Driver {
     private static ArrayList<Room> rooms;
     private static Player player;
@@ -11,6 +14,11 @@ public class Driver {
     private static Room startRoom = null;
     private static Scanner input;
 
+     /**
+     * The main method to start the game.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         input = new Scanner(System.in);
         System.out.println("Enter your Name!");
@@ -25,6 +33,9 @@ public class Driver {
         input.close();
     }
 
+    /**
+     * Runs the main game loop, processing player input and game state.
+     */
     public static void run() {
         player.getRoom().enterRoom();
 
@@ -60,6 +71,9 @@ public class Driver {
         
     }
 
+    /**
+     * Sets up the game story by creating rooms and their respective options.
+     */
     private static void makeStory() {//example
         rooms = new ArrayList<>();
         Room bedroom = new Room("Bedroom", "there are things in here, bedroom");
@@ -89,6 +103,11 @@ public class Driver {
         startRoom = bedroom;
     }
 
+    /**
+     * Defines the options and flags for the bedroom.
+     *
+     * @param bedroom The bedroom room object.
+     */
     private static void bedroomStory(Room bedroom) {
         bedroom.addOption(new Option(null, flags("hasMissile"), "missile: option 1", "can pick up missile"));
         bedroom.addOption(new Option(null, null, "closet: option 2", "go to closet"));
@@ -98,12 +117,22 @@ public class Driver {
 
     }
 
+    /**
+     * Defines the options and flags for the closet.
+     *
+     * @param closet The closet room object.
+     */
     private static void closetStory(Room closet) {
         closet.addOption(new Option(null, null, "leave: option 1", "leave closet"));
         closet.addOption(new Option(null, flags("hasHammer"), "hammer: option 2", "hammer get"));
         closet.addOption(new Option(null, null, "clothes: option 3", "clothes"));
     }
     
+    /**
+     * Defines the options and flags for the hallway.
+     *
+     * @param hallway The hallway room object.
+     */
     private static void hallwayStory(Room hallway) {
         hallway.addOption(new Option(null, null, "bedroom leave: option 1 ", "go bedroom", rooms.get(0)));
         hallway.addOption(new Option(null, null, "broken storage: option 2 ", "see Storage", rooms.get(3)));
@@ -111,18 +140,33 @@ public class Driver {
         hallway.addOption(new Option(null, null, "control room leave: option 4 ", "go control room", rooms.get(5)));
     }
 
+    /**
+     * Defines the options and flags for the storage room.
+     *
+     * @param purifier The storage room object.
+     */ 
     private static void storageStory(Room storage) {
         storage.addOption(new Option(flags("hasMissile"), flags("gameEnd"), "missile: option 1", "Death by missile"));
         storage.addOption(new Option(flags("hasBatteries"), flags("openRoom"), "hammer: option 2", "Door open"));
         storage.addOption(new Option(null, null, "leave: option 2", "leave room", rooms.get(2)));
     }
 
+    /**
+     * Defines the options and flags for the purifier room.
+     *
+     * @param purifier The purifier room object.
+     */ 
     private static void purifierStory(Room purifier) {
         purifier.addOption(new Option(null, null, "control panel: option 1", "control info"));
         purifier.addOption(new Option(null, null, "filter panel: option 2", "filter gain"));
         purifier.addOption(new Option(null, null, "leave: option 3", "leave purifier", rooms.get(2)));
     }
 
+    /**
+     * Defines the options and flags for the control room.
+     *
+     * @param purifier The control room object.
+     */ 
     private static void controlRoom(Room controlRoom) {
         controlRoom.addOption(new Option(null, null, "view console: option 1", "console info"));
         controlRoom.addOption(new Option(null, flags("hasCard"), "key card: option 2", "keycard grab"));
@@ -132,6 +176,12 @@ public class Driver {
 
     }
 
+    /**
+     * Helper method to create a list of flags.
+     *
+     * @param flag One or more flag strings.
+     * @return A list of flags.
+     */
     private static List<String> flags(String... flag) {
         return Arrays.asList(flag);
     }
