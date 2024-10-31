@@ -81,8 +81,9 @@ public class Driver {
         bedroomStory(bedroom);
         closetStory(closet);
         hallwayStory(hallway);
+        storageStory(storage);
         purifierStory(purifier);
-
+        controlRoom(controlRoom);
     
 
         startRoom = bedroom;
@@ -92,14 +93,15 @@ public class Driver {
         bedroom.addOption(new Option(null, flags("hasMissile"), "missile: option 1", "can pick up missile"));
         bedroom.addOption(new Option(null, null, "closet: option 2", "go to closet"));
         bedroom.addOption(new Option(null, flags("alarmVisit"), "clock: option 3", "go to clock"));
-        bedroom.addOption(new Option(null, null, "leave: option 4", "leave hallway"));
-        bedroom.addOption(new Option(flags("alarmVisit", "hasHammer"),
-         flags("alarmbreak"), "clock: option 2", "go to clock", rooms.get(1)));
+        bedroom.addOption(new Option(flags("alarmVisit"), flags("hasBatteries"), "break clock: option 4", "break clock + battery"));
+        bedroom.addOption(new Option(null, null, "leave: option 4", "leave hallway", rooms.get(1)));
+
     }
 
     private static void closetStory(Room closet) {
         closet.addOption(new Option(null, null, "leave: option 1", "leave closet"));
-        closet.addOption(new Option(null, null, "clothes: option 2", "clothes"));
+        closet.addOption(new Option(null, flags("hasHammer"), "hammer: option 2", "hammer get"));
+        closet.addOption(new Option(null, null, "clothes: option 3", "clothes"));
     }
     
     private static void hallwayStory(Room hallway) {
@@ -111,16 +113,23 @@ public class Driver {
 
     private static void storageStory(Room storage) {
         storage.addOption(new Option(flags("hasMissile"), flags("gameEnd"), "missile: option 1", "Death by missile"));
-        storage.addOption(new Option(flags("hasHammer"), flags("openRoom"), "hammer: option 2", "Death by missile"));
-        storage.addOption(new Option(flags("openRoom"), flags("openRoom"), "hammer: option 2", "Death by missile"));
-
-
+        storage.addOption(new Option(flags("hasBatteries"), flags("openRoom"), "hammer: option 2", "Door open"));
+        storage.addOption(new Option(null, null, "leave: option 2", "leave room", rooms.get(2)));
     }
 
     private static void purifierStory(Room purifier) {
         purifier.addOption(new Option(null, null, "control panel: option 1", "control info"));
-        purifier.addOption(new Option(null, flags("hasFilter"), "filter panel: option 2", "filter gain"));
-        purifier.addOption(new Option(null, null, "leave: option 3", "leave control", rooms.get(2)));
+        purifier.addOption(new Option(null, null, "filter panel: option 2", "filter gain"));
+        purifier.addOption(new Option(null, null, "leave: option 3", "leave purifier", rooms.get(2)));
+    }
+
+    private static void controlRoom(Room controlRoom) {
+        controlRoom.addOption(new Option(null, null, "view console: option 1", "console info"));
+        controlRoom.addOption(new Option(null, flags("hasCard"), "key card: option 2", "keycard grab"));
+        controlRoom.addOption(new Option(null, flags("hasFilter"), "filter gain: option 3", "filter gain"));
+        controlRoom.addOption(new Option(null, null, "leave: option 4", "leave control room", rooms.get(2)));
+
+
     }
 
     private static List<String> flags(String... flag) {
