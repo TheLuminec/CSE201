@@ -51,20 +51,18 @@ public class Driver {
 
     private static void makeStory() {//example
         Room bedroom = new Room("Bedroom", "there are things in here, bedroom");
-        List<String> flags = Arrays.asList("flag1");
-        bedroom.addOption(new Option(null, flags, "this is the bedroom option 1", "what happened"));
-        bedroom.addOption(new Option(null, flags, "this is the bedroom option 2", "what happened also"));
+        bedroomStory(bedroom);
 
         startRoom = bedroom;
     }
 
-    private static Room getRoom(String roomName) {
-        for(Room r : rooms) {
-            if(r.getName().equals(roomName)) {
-                return r;
-            }
-        }
+    private static void bedroomStory(Room bedroom) {
+        List<String> flags = Arrays.asList("flag1");
+        bedroom.addOption(new Option(null, Arrays.asList("missileSeen"), "missile: option 1", "can pick up missile"));
+        bedroom.addOption(new Option(null, flags, "this is the bedroom option 2", "what happened also"));
+    }
 
-        return null;
+    private static List<String> flag(String[] flag) {
+        return Arrays.asList(flag);
     }
 }
