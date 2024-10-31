@@ -34,7 +34,13 @@ public class Driver {
             }
 
             currRoom.printOptions();
-            int choice = input.nextInt();//need error handling
+            int choice = 0;
+            try{
+                choice = input.nextInt();
+            } catch(Exception e) {
+                System.out.println("Invalid Option! Please enter a number.");
+                continue;
+            }
             
             if(currRoom.chooseOption(choice, player)) {
                 //score and things
