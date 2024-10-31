@@ -18,7 +18,7 @@ public class Driver {
 
         makeStory();
 
-        player = new Player(userName, startRoom, null);
+        player = new Player(userName, 20, startRoom, null);
 
         run();
     }
@@ -37,7 +37,7 @@ public class Driver {
             int choice = input.nextInt();//need error handling
             
             if(currRoom.chooseOption(choice, player)) {
-                //do things
+                //score and things
             }
             else {
                 System.out.println("Invalid Option!");
@@ -52,8 +52,8 @@ public class Driver {
     private static void makeStory() {//example
         Room bedroom = new Room("Bedroom", "there are things in here, bedroom");
         List<String> flags = Arrays.asList("flag1");
-        bedroom.addOption(new Option(null, flags, "this is the bedroom option 1", "what happened", 2));
-        bedroom.addOption(new Option(null, flags, "this is the bedroom option 2", "what happened also", 2));
+        bedroom.addOption(new Option(null, flags, "this is the bedroom option 1", "what happened"));
+        bedroom.addOption(new Option(null, flags, "this is the bedroom option 2", "what happened also"));
 
         startRoom = bedroom;
     }
