@@ -58,6 +58,16 @@ public class Driver {
         startRoom = bedroom;
     }
 
+    private static void bedroomStory(Room bedroom) {
+        List<String> flags = Arrays.asList("flag1");
+        bedroom.addOption(new Option(null, Arrays.asList("missileSeen"), "missile: option 1", "can pick up missile"));
+        bedroom.addOption(new Option(null, flags, "this is the bedroom option 2", "what happened also"));
+    }
+
+    private static List<String> flag(String[] flag) {
+        return Arrays.asList(flag);
+    }
+    
     private static Room getRoom(String roomName) {
         for(Room r : rooms) {
             if(r.getName().equals(roomName)) {
