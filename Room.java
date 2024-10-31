@@ -28,8 +28,9 @@ public class Room {
         System.out.println(opt.getResult());
         currentOptions.clear();
         player.incrementTurnCounter(opt.getTurnCost());
-        //move rooms
-
+        if(opt.getToRoom() != null)
+            player.moveRoom(opt.getToRoom());
+            
         return true;
     }
 
