@@ -26,16 +26,13 @@ public class Room {
 
         triggerFlag(opt.triggerFlags());
         System.out.println(opt.getResult());
+        
         currentOptions.clear();
         player.incrementTurnCounter(opt.getTurnCost());
         if(opt.getToRoom() != null)
             player.moveRoom(opt.getToRoom());
             
         return true;
-    }
-
-    public boolean chooseOption(int choose) {
-        return false;
     }
 
     public void triggerFlag(String flag) {
