@@ -65,9 +65,19 @@ public class Driver {
         Room bedroom = new Room("Bedroom", "there are things in here, bedroom");
         Room closet = new Room("Closet", "closet (hammer)");
         Room hallway = new Room("Hallway", "hallway stuff");
+        Room storage = new Room("Storage", "storage stuff");
+        Room purifier = new Room("Purifier", "purifier stuff");
+        Room controlRoom = new Room("Control Room", "control stuff");
+
+
         rooms.add(bedroom);
         rooms.add(closet);
         rooms.add(hallway);
+        rooms.add(storage);
+        rooms.add(purifier);
+        rooms.add(controlRoom);
+
+
         bedroomStory(bedroom);
         closetStory(closet);
     
@@ -76,23 +86,30 @@ public class Driver {
     }
 
     private static void bedroomStory(Room bedroom) {
-        List<String> flags = Arrays.asList("flag1");
         bedroom.addOption(new Option(null, flags("takeMissile"), "missile: option 1", "can pick up missile"));
         bedroom.addOption(new Option(null, null, "closet: option 2", "go to closet"));
         bedroom.addOption(new Option(null, flags("alarmVisit"), "clock: option 3", "go to clock"));
         bedroom.addOption(new Option(null, null, "leave: option 4", "leave hallway"));
-        bedroom.addOption(new Option(flags(new String[]{"alarmVisit", "hasHammer"}), flags("alarmbreak"), "clock: option 2", "go to clock", rooms.get(1)));
+        bedroom.addOption(new Option(flags("alarmVisit", "hasHammer"),
+         flags("alarmbreak"), "clock: option 2", "go to clock", rooms.get(1)));
     }
 
     private static void closetStory(Room closet) {
-        closet.addOption(new Option(null, null, "leave: option 1", "leave hallway"));
+        closet.addOption(new Option(null, null, "leave: option 1", "leave closet"));
+        closet.addOption(new Option(null, null, "clothes: option 2", "clothes"));
     }
     
     private static void hallwayStory(Room hallway) {
-        hallway.addOption(new Option(null, null, "bedroom leave: option 1 ", "go bedroom"));
-        hallway.addOption(new Option(null, null, "bedroom leave: option 1 ", "go bedroom"));
-        hallway.addOption(new Option(null, null, "bedroom leave: option 1 ", "go bedroom"));
-        hallway.addOption(new Option(null, null, "bedroom leave: option 1 ", "go bedroom"));
+        hallway.addOption(new Option(null, null, "bedroom leave: option 1 ", "go bedroom", rooms.get(0)));
+        hallway.addOption(new Option(null, null, "broken storage: option 2 ", "see Storage", rooms.get(3)));
+        hallway.addOption(new Option(null, null, "purifier leave: option 3 ", "go purifier", rooms.get(4)));
+        hallway.addOption(new Option(null, null, "control room leave: option 4 ", "go control room", rooms.get(5)));
+    }
+
+    private static void purifierStory(Room purifier) {
+        purifier.addOption(new Option(null, null, "control panel: option 1", "control info"));
+        purifier.addOption(new Option(null, flags("hasFilter"), "filter panel: option 2", "filter gain"));
+        purifier.addOption(new Option(null, null, "leave: option 3", "leave control", rooms.get(2)));
 
     }
 
