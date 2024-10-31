@@ -27,8 +27,14 @@ public class Option {
         this.toRoom = toRoom;
     }
 
+
+
     public Option(Collection<String> flagsNeeded, Collection<String> flagsTriggered, String description, String result) {
         this(flagsNeeded, flagsTriggered, description, result, 1, null);
+    }
+
+    public Option(Collection<String> flagsNeeded, Collection<String> flagsTriggered, String description, String result, Room room) {
+        this(flagsNeeded, flagsTriggered, description, result, 1, room);
     }
 
     public ArrayList<String> triggerFlags() {

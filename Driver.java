@@ -57,15 +57,18 @@ public class Driver {
 
     private static void makeStory() {//example
         Room bedroom = new Room("Bedroom", "there are things in here, bedroom");
-        Room closet = new Room("Closet", "closet");
-        bedroomStory(bedroom);
-        closetStory(closet);
-
-
-        
-        startRoom = bedroom;
+        Room closet = new Room("Closet", "closet (hammer)");
+        Room hallway = new Room("Hallway", "hallway stuff");
         rooms.add(bedroom);
         rooms.add(closet);
+        rooms.add(hallway);
+        bedroomStory(bedroom);
+        closetStory(closet);
+        
+
+
+        startRoom = bedroom;
+
 
     }
 
@@ -75,11 +78,19 @@ public class Driver {
         bedroom.addOption(new Option(null, null, "closet: option 2", "go to closet"));
         bedroom.addOption(new Option(null, flags("alarmVisit"), "clock: option 3", "go to clock"));
         bedroom.addOption(new Option(null, null, "leave: option 4", "leave hallway"));
-        bedroom.addOption(new Option(flags(new String[]{"alarmVisit", "hasHammer"}), flags("alarmbreak"), "clock: option 2", "go to clock"));
+        bedroom.addOption(new Option(flags(new String[]{"alarmVisit", "hasHammer"}), flags("alarmbreak"), "clock: option 2", "go to clock", rooms.get(1)));
     }
 
     private static void closetStory(Room closet) {
-        closet.addOption(new Option(null, null, "leave: option 4", "leave hallway"));
+        closet.addOption(new Option(null, null, "leave: option 1", "leave hallway"));
+    }
+    
+    private static void hallwayStory(Room hallway) {
+        hallway.addOption(new Option(null, null, "bedroom leave: option 1 ", "go bedroom"));
+        hallway.addOption(new Option(null, null, "bedroom leave: option 1 ", "go bedroom"));
+        hallway.addOption(new Option(null, null, "bedroom leave: option 1 ", "go bedroom"));
+        hallway.addOption(new Option(null, null, "bedroom leave: option 1 ", "go bedroom"));
+
     }
 
     private static List<String> flags(String... flag) {
