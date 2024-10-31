@@ -103,6 +103,13 @@ public class Driver {
         hallway.addOption(new Option(null, null, "control room leave: option 4 ", "go control room", rooms.get(5)));
     }
 
+    private static void purifierStory(Room purifier) {
+        purifier.addOption(new Option(null, null, "control panel: option 1", "control info"));
+        purifier.addOption(new Option(null, flags("hasFilter"), "filter panel: option 2", "filter gain"));
+        purifier.addOption(new Option(null, null, "leave: option 3", "leave control", rooms.get(2)));
+
+    }
+
     private static List<String> flags(String... flag) {
         return Arrays.asList(flag);
     }
