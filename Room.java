@@ -34,6 +34,10 @@ public class Room {
         return true;
     }
 
+    public boolean chooseOption(int choose) {
+        return false;
+    }
+
     public void triggerFlag(String flag) {
         flags.add(flag);
     }
