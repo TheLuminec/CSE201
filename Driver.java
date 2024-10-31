@@ -57,19 +57,21 @@ public class Driver {
 
     private static void makeStory() {//example
         Room bedroom = new Room("Bedroom", "there are things in here, bedroom");
-        List<String> flags = Arrays.asList("flag1");
-        bedroom.addOption(new Option(null, flags, "this is the bedroom option 1", "what happened"));
-        bedroom.addOption(new Option(null, flags, "this is the bedroom option 2", "what happened also"));
+        Room closet = new Room("Closet", "closet");
+        bedroomStory(bedroom);
 
         startRoom = bedroom;
+        rooms.add(bedroom);
+        rooms.add(closet);
+
     }
 
     private static void bedroomStory(Room bedroom) {
         List<String> flags = Arrays.asList("flag1");
-        
-        bedroom.addOption(new Option(null, flags("missileSeen"), "missile: option 1", "can pick up missile"));
+        bedroom.addOption(new Option(null, flags("takeMissile"), "missile: option 1", "can pick up missile"));
         bedroom.addOption(new Option(null, flags("closetVisit"), "closet: option 2", "go to closet"));
-        bedroom.addOption(new Option(null, flags("alarmVisit"), "clock: option 2", "go to clock"));
+        bedroom.addOption(new Option(null, flags("alarmVisit"), "clock: option 3", "go to clock"));
+        bedroom.addOption(new Option(null, null, "leave: option 4", "leave hallway"));
         bedroom.addOption(new Option(flags(new String[]{"alarmVisit", "hasHammer"}), flags("alarmbreak"), "clock: option 2", "go to clock"));
     }
 
