@@ -8,8 +8,9 @@ public class Option {
     private final String result;
     private boolean isDone = false;
     private int turnCost;
+    private Room toRoom;
 
-    public Option(Collection<String> flagsNeeded, Collection<String> flagsTriggered, String description, String result, int turnCost) {
+    public Option(Collection<String> flagsNeeded, Collection<String> flagsTriggered, String description, String result, int turnCost, Room toRoom) {
         if(flagsNeeded != null)
             this.flagsNeeded = new ArrayList<>(flagsNeeded);
         else
@@ -23,6 +24,11 @@ public class Option {
         this.description = description;
         this.result = result;
         this.turnCost = turnCost;
+        this.toRoom = toRoom;
+    }
+
+    public Option(Collection<String> flagsNeeded, Collection<String> flagsTriggered, String description, String result) {
+        this(flagsNeeded, flagsTriggered, description, result, 1, null);
     }
 
     public ArrayList<String> triggerFlags() {
@@ -44,6 +50,10 @@ public class Option {
 
     public int getTurnCost() {
         return turnCost;
+    }
+
+    public Room getToRoom() {
+        return toRoom;
     }
 
     @Override
