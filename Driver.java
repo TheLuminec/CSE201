@@ -18,9 +18,11 @@ public class Driver {
 
         makeStory();
 
-        player = new Player(userName, 20, startRoom, null);
+        player = new Player(userName, 30, startRoom, null);
 
         run();
+
+        input.close();
     }
 
     public static void run() {
@@ -44,6 +46,9 @@ public class Driver {
             
             if(currRoom.chooseOption(choice, player)) {
                 //score and things
+                if(currRoom.hasFlag("gameEnd")) {
+                    break;
+                }
             }
             else {
                 System.out.println("Invalid Option!");
@@ -52,10 +57,11 @@ public class Driver {
 
         }
 
-        input.close();
+        
     }
 
     private static void makeStory() {//example
+        rooms = new ArrayList<>();
         Room bedroom = new Room("Bedroom", "there are things in here, bedroom");
         Room closet = new Room("Closet", "closet (hammer)");
         Room hallway = new Room("Hallway", "hallway stuff");
@@ -64,12 +70,9 @@ public class Driver {
         rooms.add(hallway);
         bedroomStory(bedroom);
         closetStory(closet);
-        
-
+    
 
         startRoom = bedroom;
-
-
     }
 
     private static void bedroomStory(Room bedroom) {

@@ -69,7 +69,11 @@ public class Room {
     }
 
     public void enterRoom() {
-        System.out.println(roomEnterDescription);
+        System.out.println(getName() + ": " + roomEnterDescription);
+    }
+
+    public boolean hasFlag(String flag) {
+        return flags.contains(flag);
     }
 
     private boolean checkFlags(Option opt) {
