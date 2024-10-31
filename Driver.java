@@ -53,7 +53,10 @@ public class Driver {
         Room bedroom = new Room("Bedroom", "there are things in here, bedroom");
         Room closet = new Room("Closet", "closet");
         bedroomStory(bedroom);
+        closetStory(closet);
 
+
+        
         startRoom = bedroom;
         rooms.add(bedroom);
         rooms.add(closet);
@@ -63,17 +66,17 @@ public class Driver {
     private static void bedroomStory(Room bedroom) {
         List<String> flags = Arrays.asList("flag1");
         bedroom.addOption(new Option(null, flags("takeMissile"), "missile: option 1", "can pick up missile"));
-        bedroom.addOption(new Option(null, flags("closetVisit"), "closet: option 2", "go to closet"));
+        bedroom.addOption(new Option(null, null, "closet: option 2", "go to closet"));
         bedroom.addOption(new Option(null, flags("alarmVisit"), "clock: option 3", "go to clock"));
         bedroom.addOption(new Option(null, null, "leave: option 4", "leave hallway"));
         bedroom.addOption(new Option(flags(new String[]{"alarmVisit", "hasHammer"}), flags("alarmbreak"), "clock: option 2", "go to clock"));
     }
 
-    private static List<String> flags(String[] flag) {
-        return Arrays.asList(flag);
+    private static void closetStory(Room closet) {
+        closet.addOption(new Option(null, null, "leave: option 4", "leave hallway"));
     }
 
-    private static List<String> flags(String flag) {
+    private static List<String> flags(String... flag) {
         return Arrays.asList(flag);
     }
 
