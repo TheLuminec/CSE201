@@ -37,6 +37,8 @@ public class Option {
     }
 
     public boolean getIsDone() {
+        if(toRoom != null)
+            return false;
         return isDone;
     }
 
