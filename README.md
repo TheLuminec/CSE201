@@ -5,8 +5,6 @@ This is a simple text-based adventure game developed for the CSE201 class projec
 ## Table of Contents
 
 - [Features](#features)
-- [Prerequisites](#prerequisites)
-- [Setup and Installation](#setup-and-installation)
 - [How to Play](#how-to-play)
 - [Game Mechanics](#game-mechanics)
 - [Class Structure](#class-structure)
@@ -19,39 +17,6 @@ This is a simple text-based adventure game developed for the CSE201 class projec
 - **Choice-Based Outcomes**: Your decisions trigger flags that open up new options or endings.
 - **Turn-Based System**: You have a limited number of turns (default is 30) to complete the game.
 - **Simple Interface**: Text-based interaction that's easy to use.
-
-## Prerequisites
-
-- **Java Development Kit (JDK) 8 or higher**: Ensure that Java is installed on your system.
-- **Command Line Interface**: A terminal or command prompt to compile and run the game.
-
-## Setup and Installation
-
-1. **Download the Source Code**
-
-   Save the `.java` files (`Driver.java`, `Player.java`, `Room.java`, `Option.java`) into a single directory on your computer.
-
-2. **Open the Terminal**
-
-   Navigate to the directory where you saved the Java files.
-
-3. **Compile the Code**
-
-   Run the following command to compile all the Java files:
-
-   ```bash
-   javac *.java
-   ```
-
-   This will generate `.class` files for each Java file.
-
-4. **Run the Game**
-
-   After successful compilation, run the game using:
-
-   ```bash
-   java Driver
-   ```
 
 ## How to Play
 
