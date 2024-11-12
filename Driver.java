@@ -26,7 +26,7 @@ public class Driver {
 
         makeStory();
 
-        player = new Player(userName, 30, startRoom, null);
+        player = new Player(userName, 30, startRoom);
 
         run();
 
