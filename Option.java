@@ -8,6 +8,8 @@ import java.util.Collection;
 public class Option {
     private final ArrayList<String> flagsNeeded;
     private final ArrayList<String> flagsTriggered;
+    private final ArrayList<String> itemsNeeded;
+    private final ArrayList<String> items;
     private final String description;
     private final String result;
     private boolean isDone = false;
@@ -24,8 +26,9 @@ public class Option {
      * @param turnCost       The number of turns this option consumes.
      * @param toRoom         The room to move to after choosing this option (if any).
      */
-    public Option(Collection<String> flagsNeeded, Collection<String> flagsTriggered,
-                  String description, String result, int turnCost, Room toRoom) {
+    public Option(Collection<String> flagsNeeded, Collection<String> flagsTriggered, 
+        Collection<String> itemsNeeded, Collection<String> items,
+        String description, String result, int turnCost, Room toRoom) {
         if (flagsNeeded != null)
             this.flagsNeeded = new ArrayList<>(flagsNeeded);
         else
@@ -35,6 +38,16 @@ public class Option {
             this.flagsTriggered = new ArrayList<>(flagsTriggered);
         else
             this.flagsTriggered = new ArrayList<>();
+
+        if(items != null)
+            this.items = new ArrayList<>(items);
+        else
+            this.items = new ArrayList<>();
+
+        if(itemsNeeded != null)
+            this.itemsNeeded = new ArrayList<>(itemsNeeded);
+        else
+            this.itemsNeeded = new ArrayList<String>();
 
         this.description = description;
         this.result = result;
@@ -52,7 +65,7 @@ public class Option {
      */
     public Option(Collection<String> flagsNeeded, Collection<String> flagsTriggered,
                   String description, String result) {
-        this(flagsNeeded, flagsTriggered, description, result, 1, null);
+        this(flagsNeeded, flagsTriggered, null, null, description, result, 1, null);
     }
 
     /**
@@ -66,7 +79,7 @@ public class Option {
      */
     public Option(Collection<String> flagsNeeded, Collection<String> flagsTriggered,
                   String description, String result, Room room) {
-        this(flagsNeeded, flagsTriggered, description, result, 1, room);
+        this(flagsNeeded, flagsTriggered, null, null, description, result, 1, room);
     }
 
     /**
@@ -100,6 +113,15 @@ public class Option {
     }
 
     /**
+     * Gets the items required to make this option available.
+     *
+     * @return A list of required items.
+     */
+    public ArrayList<String> getNeededItems() {
+        return itemsNeeded;
+    }
+
+    /**
      * Gets the result text to display after choosing this option.
      *
      * @return The result string.
@@ -124,6 +146,10 @@ public class Option {
      */
     public Room getToRoom() {
         return toRoom;
+    }
+
+    public ArrayList<String> getItems() {
+        return items;
     }
 
     @Override

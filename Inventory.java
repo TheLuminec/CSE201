@@ -20,11 +20,15 @@ public abstract class Inventory {
     }
 
     public void addItems(ArrayList<String> items) {
-        this.items.addAll(items);
+        for(String item : items) {
+            addItem(item);
+        }
     }
 
     public void removeItems(ArrayList<String> items) {
-        this.items.removeAll(items);
+        for(String item : items) {
+            removeItem(item);
+        }
     }
 
     public void addItem(String item) {

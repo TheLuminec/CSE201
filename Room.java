@@ -44,6 +44,10 @@ public class Room {
 
         currentOptions.clear();
         player.incrementTurnCounter(opt.getTurnCost());
+        
+        player.removeItems(opt.getNeededItems());
+        player.addItems(opt.getItems());
+        
         if (opt.getToRoom() != null)
             player.moveRoom(opt.getToRoom());
 
@@ -89,12 +93,12 @@ public class Room {
     /**
      * Prints the available options to the player.
      */
-    public void printOptions() {
+    public void printOptions(Player player) {
         int index = 1;
         currentOptions.clear();
 
         for (Option opt : options) {
-            if (checkFlags(opt)) {
+            if (checkFlags(opt) && checkItems(opt, player)) {
                 currentOptions.add(opt);
                 System.out.println("[" + index + "]: " + opt);
                 index++;
@@ -139,6 +143,22 @@ public class Room {
             return false;
         for (String flag : opt.getNeededFlags()) {
             if (!flags.contains(flag)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks if an option is available based on its required items.
+     * 
+     * @param opt The option to check.
+     * @param player The player to check the items of.
+     * @return True if the option can be shown, false otherwise.
+     */
+    private boolean checkItems(Option opt, Player player) {
+        for (String item : opt.getNeededItems()) {
+            if (!player.contains(item)) {
                 return false;
             }
         }

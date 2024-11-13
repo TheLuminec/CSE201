@@ -46,7 +46,7 @@ public class Driver {
                 break;
             }
 
-            currRoom.printOptions();
+            currRoom.printOptions(player);
             int choice = 0;
             try{
                 choice = input.nextInt();
@@ -185,6 +185,16 @@ public class Driver {
      */
     private static List<String> flags(String... flag) {
         return Arrays.asList(flag);
+    }
+
+    /**
+     * Helper method to create a list of items.
+     *
+     * @param flag One or more item strings.
+     * @return A list of items.
+     */
+    private static List<String> items(String... item) {
+        return Arrays.asList(item);
     }
 
 }
