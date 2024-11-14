@@ -24,7 +24,8 @@ public class Driver {
         System.out.println("Enter your Name!");
         String userName = input.nextLine();
 
-        makeStory();
+        //makeStory();
+        testStory();
 
         player = new Player(userName, 30, startRoom);
 
@@ -69,6 +70,17 @@ public class Driver {
         }
 
         
+    }
+
+    private static void testStory() {
+        rooms = new ArrayList<>();
+        Room testroom = new Room("Testroom", "This is an example test room");
+        rooms.add(testroom);
+        startRoom = testroom;
+
+        testroom.addOption(new Option(null, null, null, items("item1"), "Take item", "you took the item", 1, null));
+        testroom.addOption(new Option(null, null, items("item1"), null, "Use item", "you used the item", 1, null));
+
     }
 
     /**

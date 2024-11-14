@@ -6,10 +6,10 @@ import java.util.Collection;
  * Options may have prerequisites and can trigger certain game flags.
  */
 public class Option {
-    private final ArrayList<String> flagsNeeded;
-    private final ArrayList<String> flagsTriggered;
-    private final ArrayList<String> itemsNeeded;
-    private final ArrayList<String> items;
+    private ArrayList<String> flagsNeeded;
+    private ArrayList<String> flagsTriggered;
+    private ArrayList<String> itemsNeeded;
+    private ArrayList<String> items;
     private final String description;
     private final String result;
     private boolean isDone = false;

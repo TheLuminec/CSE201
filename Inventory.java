@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public abstract class Inventory {
-    protected ArrayList<String> items;
+    protected ArrayList<String> items = new ArrayList<>();
 
     public boolean contains(String item) {
         return items.contains(item);
