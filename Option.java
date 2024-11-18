@@ -17,6 +17,23 @@ public class Option {
     private Room toRoom;
 
     /**
+     * Default constructor for a basic option
+     * @param description the description of the option
+     * @param result    the result of the option
+     */
+    public Option(String description, String result) {
+        this.description = description;
+        this.result = result;
+        this.flagsNeeded = new ArrayList<String>();
+        this.flagsTriggered = new ArrayList<String>();
+        this.itemsNeeded = new ArrayList<String>();
+        this.items = new ArrayList<String>();
+        this.turnCost = 1;
+        this.toRoom = null;
+        this.isDone = false;
+    }
+
+    /**
      * Constructs an Option with specified parameters.
      *
      * @param flagsNeeded    Flags required for this option to be available.
@@ -29,28 +46,19 @@ public class Option {
     public Option(Collection<String> flagsNeeded, Collection<String> flagsTriggered, 
         Collection<String> itemsNeeded, Collection<String> items,
         String description, String result, int turnCost, Room toRoom) {
+        this(description, result);
         if (flagsNeeded != null)
             this.flagsNeeded = new ArrayList<>(flagsNeeded);
-        else
-            this.flagsNeeded = new ArrayList<>();
 
         if (flagsTriggered != null)
             this.flagsTriggered = new ArrayList<>(flagsTriggered);
-        else
-            this.flagsTriggered = new ArrayList<>();
 
         if(items != null)
             this.items = new ArrayList<>(items);
-        else
-            this.items = new ArrayList<>();
 
         if(itemsNeeded != null)
             this.itemsNeeded = new ArrayList<>(itemsNeeded);
-        else
-            this.itemsNeeded = new ArrayList<String>();
 
-        this.description = description;
-        this.result = result;
         this.turnCost = turnCost;
         this.toRoom = toRoom;
     }

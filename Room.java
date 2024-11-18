@@ -164,4 +164,17 @@ public class Room {
         }
         return true;
     }
+
+    public void setFlag(String flag) {
+
+    }
+    public void needFlag(String flag) {
+
+    }
+    public void setItem(String item) {
+
+    }
+    public void needItem(String item) {
+
+    }
 }

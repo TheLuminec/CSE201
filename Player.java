@@ -16,6 +16,7 @@ public class Player extends Inventory {
      * @param location   The starting room.
      */
     public Player(String username, int turnCount, Room location) {
+        super();
         this.username = username;
         this.location = location;
         this.MAX_TURNS = turnCount;
