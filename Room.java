@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -165,16 +166,35 @@ public class Room {
         return true;
     }
 
-    public void setFlag(String flag) {
-
+    /**
+     * Adds to the triggered flags for the last added option
+     * @param flags The flags to add
+     */
+    public void lastSetFlags(String... flags) {
+        options.get(options.size()-1).addTriggeredFlags(Arrays.asList(flags));
     }
-    public void needFlag(String flag) {
 
+    /**
+     * Adds to the needed flags for the last added option
+     * @param flags The flags to add
+     */
+    public void lastNeedFlags(String... flags) {
+        options.get(options.size()-1).addNeededFlags(Arrays.asList(flags));
     }
-    public void setItem(String item) {
 
+    /**
+     * Adds to the triggered items for the last added option
+     * @param items The items to add
+     */
+    public void lastSetItems(String... items) {
+        options.get(options.size()-1).addItems(Arrays.asList(items));
     }
-    public void needItem(String item) {
 
+    /**
+     * Adds the needed items for the last added option
+     * @param items The items to add
+     */
+    public void lastNeedItems(String... items) {
+        options.get(options.size()-1).addNeededItems(Arrays.asList(items));
     }
 }
