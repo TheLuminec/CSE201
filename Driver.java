@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -10,7 +8,6 @@ import java.util.Scanner;
 public class Driver {
     private static ArrayList<Room> rooms;
     private static Player player;
-    // put something here
     private static Room startRoom = null;
     private static Scanner input;
 
@@ -24,9 +21,10 @@ public class Driver {
         System.out.println("Enter your Name!");
         String userName = input.nextLine();
 
-        makeStory();
+        //makeStory();
+        testStory();
 
-        player = new Player(userName, 30, startRoom, null);
+        player = new Player(userName, 30, startRoom);
 
         run();
 
@@ -46,7 +44,7 @@ public class Driver {
                 break;
             }
 
-            currRoom.printOptions();
+            currRoom.printOptions(player);
             int choice = 0;
             try{
                 choice = input.nextInt();
@@ -69,6 +67,21 @@ public class Driver {
         }
 
         
+    }
+
+    private static void testStory() {
+        rooms = new ArrayList<>();
+        Room testroom = new Room("Testroom", "This is an example test room");
+        rooms.add(testroom);
+        startRoom = testroom;
+
+        testroom.addOption(new Option("Take item", "you took the item", 5));
+        testroom.lastSetItems("item1");
+        testroom.lastSetFlags("this is a flag");
+
+        testroom.addOption(new Option("Use item", "you used the item"));
+        testroom.lastNeedItems("item1");
+
     }
 
     /**
@@ -109,11 +122,11 @@ public class Driver {
      * @param bedroom The bedroom room object.
      */
     private static void bedroomStory(Room bedroom) {
-        bedroom.addOption(new Option(null, flags("hasMissile"), "missile", "can pick up missile"));
-        bedroom.addOption(new Option(null, null, "closet", "go to closet"));
-        bedroom.addOption(new Option(null, flags("alarmVisit"), "clock", "go to clock"));
-        bedroom.addOption(new Option(flags("alarmVisit"), flags("hasBatteries"), "break clock", "break clock + battery"));
-        bedroom.addOption(new Option(null, null, "leave", "leave hallway", rooms.get(2)));
+        // bedroom.addOption(new Option(null, flags("hasMissile"), "missile", "can pick up missile"));
+        // bedroom.addOption(new Option(null, null, "closet", "go to closet"));
+        // bedroom.addOption(new Option(null, flags("alarmVisit"), "clock", "go to clock"));
+        // bedroom.addOption(new Option(flags("alarmVisit"), flags("hasBatteries"), "break clock", "break clock + battery"));
+        // bedroom.addOption(new Option(null, null, "leave", "leave hallway", rooms.get(2)));
 
     }
 
@@ -123,9 +136,9 @@ public class Driver {
      * @param closet The closet room object.
      */
     private static void closetStory(Room closet) {
-        closet.addOption(new Option(null, null, "leave", "leave closet", rooms.get(0)));
-        closet.addOption(new Option(null, flags("hasHammer"), "hammer", "hammer get"));
-        closet.addOption(new Option(null, null, "clothes", "clothes"));
+        // closet.addOption(new Option(null, null, "leave", "leave closet", rooms.get(0)));
+        // closet.addOption(new Option(null, flags("hasHammer"), "hammer", "hammer get"));
+        // closet.addOption(new Option(null, null, "clothes", "clothes"));
     }
     
     /**
@@ -134,10 +147,10 @@ public class Driver {
      * @param hallway The hallway room object.
      */
     private static void hallwayStory(Room hallway) {
-        hallway.addOption(new Option(null, null, "bedroom leave", "go bedroom", rooms.get(0)));
-        hallway.addOption(new Option(null, null, "broken storage", "see Storage", rooms.get(3)));
-        hallway.addOption(new Option(null, null, "purifier leave", "go purifier", rooms.get(4)));
-        hallway.addOption(new Option(null, null, "control room leave", "go control room", rooms.get(5)));
+        // hallway.addOption(new Option(null, null, "bedroom leave", "go bedroom", rooms.get(0)));
+        // hallway.addOption(new Option(null, null, "broken storage", "see Storage", rooms.get(3)));
+        // hallway.addOption(new Option(null, null, "purifier leave", "go purifier", rooms.get(4)));
+        // hallway.addOption(new Option(null, null, "control room leave", "go control room", rooms.get(5)));
     }
 
     /**
@@ -146,9 +159,9 @@ public class Driver {
      * @param purifier The storage room object.
      */ 
     private static void storageStory(Room storage) {
-        storage.addOption(new Option(flags("hasMissile"), flags("gameEnd"), "missile", "Death by missile"));
-        storage.addOption(new Option(flags("hasBatteries"), flags("openRoom"), "hammer", "Door open"));
-        storage.addOption(new Option(null, null, "leave", "leave room", rooms.get(2)));
+        // storage.addOption(new Option(flags("hasMissile"), flags("gameEnd"), "missile", "Death by missile"));
+        // storage.addOption(new Option(flags("hasBatteries"), flags("openRoom"), "hammer", "Door open"));
+        // storage.addOption(new Option(null, null, "leave", "leave room", rooms.get(2)));
     }
 
     /**
@@ -157,10 +170,10 @@ public class Driver {
      * @param purifier The purifier room object.
      */ 
     private static void purifierStory(Room purifier) {
-        purifier.addOption(new Option(null, null, "control panel", "control info"));
-        purifier.addOption(new Option(null, flags("gameEnd"), "fix air purifier", "Congrats! You fixed the air purifier!"));
-        purifier.addOption(new Option(null, null, "filter panel", "filter gain"));
-        purifier.addOption(new Option(null, null, "leave", "leave purifier", rooms.get(2)));
+        // purifier.addOption(new Option(null, null, "control panel", "control info"));
+        // purifier.addOption(new Option(null, flags("gameEnd"), "fix air purifier", "Congrats! You fixed the air purifier!"));
+        // purifier.addOption(new Option(null, null, "filter panel", "filter gain"));
+        // purifier.addOption(new Option(null, null, "leave", "leave purifier", rooms.get(2)));
     }
 
     /**
@@ -169,22 +182,12 @@ public class Driver {
      * @param purifier The control room object.
      */ 
     private static void controlRoom(Room controlRoom) {
-        controlRoom.addOption(new Option(null, null, "view console", "console info"));
-        controlRoom.addOption(new Option(null, flags("hasCard"), "key card", "keycard grab"));
-        controlRoom.addOption(new Option(null, flags("hasFilter"), "filter gain", "filter gain"));
-        controlRoom.addOption(new Option(null, null, "leave", "leave control room", rooms.get(2)));
+        // controlRoom.addOption(new Option(null, null, "view console", "console info"));
+        // controlRoom.addOption(new Option(null, flags("hasCard"), "key card", "keycard grab"));
+        // controlRoom.addOption(new Option(null, flags("hasFilter"), "filter gain", "filter gain"));
+        // controlRoom.addOption(new Option(null, null, "leave", "leave control room", rooms.get(2)));
 
 
-    }
-
-    /**
-     * Helper method to create a list of flags.
-     *
-     * @param flag One or more flag strings.
-     * @return A list of flags.
-     */
-    private static List<String> flags(String... flag) {
-        return Arrays.asList(flag);
     }
 
 }
