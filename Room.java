@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -44,6 +45,10 @@ public class Room {
 
         currentOptions.clear();
         player.incrementTurnCounter(opt.getTurnCost());
+        
+        player.removeItems(opt.getNeededItems());
+        player.addItems(opt.getItems());
+        
         if (opt.getToRoom() != null)
             player.moveRoom(opt.getToRoom());
 
@@ -89,12 +94,12 @@ public class Room {
     /**
      * Prints the available options to the player.
      */
-    public void printOptions() {
+    public void printOptions(Player player) {
         int index = 1;
         currentOptions.clear();
 
         for (Option opt : options) {
-            if (checkFlags(opt)) {
+            if (checkFlags(opt) && checkItems(opt, player)) {
                 currentOptions.add(opt);
                 System.out.println("[" + index + "]: " + opt);
                 index++;
@@ -143,5 +148,53 @@ public class Room {
             }
         }
         return true;
+    }
+
+    /**
+     * Checks if an option is available based on its required items.
+     * 
+     * @param opt The option to check.
+     * @param player The player to check the items of.
+     * @return True if the option can be shown, false otherwise.
+     */
+    private boolean checkItems(Option opt, Player player) {
+        for (String item : opt.getNeededItems()) {
+            if (!player.contains(item)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Adds to the triggered flags for the last added option
+     * @param flags The flags to add
+     */
+    public void lastSetFlags(String... flags) {
+        options.get(options.size()-1).addTriggeredFlags(Arrays.asList(flags));
+    }
+
+    /**
+     * Adds to the needed flags for the last added option
+     * @param flags The flags to add
+     */
+    public void lastNeedFlags(String... flags) {
+        options.get(options.size()-1).addNeededFlags(Arrays.asList(flags));
+    }
+
+    /**
+     * Adds to the triggered items for the last added option
+     * @param items The items to add
+     */
+    public void lastSetItems(String... items) {
+        options.get(options.size()-1).addItems(Arrays.asList(items));
+    }
+
+    /**
+     * Adds the needed items for the last added option
+     * @param items The items to add
+     */
+    public void lastNeedItems(String... items) {
+        options.get(options.size()-1).addNeededItems(Arrays.asList(items));
     }
 }

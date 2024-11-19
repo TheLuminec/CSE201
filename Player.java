@@ -2,10 +2,9 @@
  * Represents the player in the game.
  * Manages player's name, location, inventory, and turn count.
  */
-public class Player {
+public class Player extends Inventory {
     private String username;
     private Room location;
-    private Inventory inventory;
     private int turnCounter = 0;
     private final int MAX_TURNS;
 
@@ -16,10 +15,10 @@ public class Player {
      * @param turnCount  The maximum number of turns allowed.
      * @param location   The starting room.
      */
-    public Player(String username, int turnCount, Room location, Inventory inventory) {
+    public Player(String username, int turnCount, Room location) {
+        super();
         this.username = username;
         this.location = location;
-        this.inventory = inventory;
         this.MAX_TURNS = turnCount;
     }
 
@@ -51,15 +50,6 @@ public class Player {
             this.location = room;
             room.enterRoom();
         }
-    }
-
-    /**
-     * Gets the player's inventory.
-     *
-     * @return The inventory object.
-     */
-    public Inventory getInventory() {
-        return this.inventory;
     }
 
     /**
