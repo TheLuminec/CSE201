@@ -54,7 +54,6 @@ public class Driver {
             }
             
             if(currRoom.chooseOption(choice, player)) {
-                //score and things
                 if(currRoom.hasFlag("gameEnd")) {
                     break;
                 }
@@ -66,7 +65,10 @@ public class Driver {
 
         }
 
-        
+        if(player.getScore() > 0.1)
+            System.out.println("Congratulations " + player.getName() + " your score is: " + Math.round(player.getScore() * 100.0) / 100.0 + "!");
+        else
+            System.out.println("You lost " + player.getName() + "!");
     }
 
     private static void testStory() {
@@ -81,6 +83,7 @@ public class Driver {
 
         testroom.addOption(new Option("Use item", "you used the item"));
         testroom.lastNeedItems("item1");
+        testroom.lastSetFlags("gameEnd");
 
     }
 
@@ -190,4 +193,7 @@ public class Driver {
 
     }
 
+    static Scanner getScanner() {
+        return input;
+    }
 }
