@@ -6,6 +6,7 @@ import java.util.random.RandomGenerator;
 public final class HangManPuzzle extends Puzzle {
     String words = "Temporary Puzzles Are Cool";
     String concealWords = "";
+    int guessCount = 6;
 
     public HangManPuzzle() {
         generateWords();
@@ -42,23 +43,49 @@ public final class HangManPuzzle extends Puzzle {
     // Have user do the puzzle
     @Override
     public boolean triggerPuzzle() {
-
+        while(guessCount > 0) {
+            if (concealWords.equals(words)) {
+                System.out.println("You solved the puzzle.");
+                return true;
+            }
+            System.out.printf("%d guesses remaining!\n%s\n", guessCount, concealWords);
+            // Incorrect guess
+            if (!guessChar()) {
+                guessCount--;
+            }
+        }
+        System.out.println("You failed the puzzle");
         return false;
     }
 
     // Helper method for filling in characters
-    private void guessChar() {
-        boolean isValidInput = false;
-        while(!isValidInput) {
+    private boolean guessChar() {
+        while(true) {
+            System.out.println("Guess a letter: ");
             String input = Driver.getScanner().nextLine();
             if (input.length() == 1 && input.charAt(0) != ' ') {
-                processChar(input.charAt(0));
+                return (processChar(input.charAt(0)));
+                // isValidInput = true;
             }
+            System.out.println("Please enter a valid character. (Ex: 'b')");
         }
     }
 
-    private void processChar(char ch) {
-
+    private boolean processChar(char ch) {
+        char[] letters = concealWords.toCharArray();
+        boolean letterFound = false;
+        for (int i = 0; i < concealWords.length(); i++) {
+            if (words.charAt(i) == ch) {
+                letters[i] = ch;
+                letterFound = true;
+            }
+            if (words.charAt(i) == Character.toUpperCase(ch)) {
+                letters[i] = Character.toUpperCase(ch);
+                letterFound = true;
+            }
+        }
+        concealWords = new String(letters);
+        return letterFound;
     }
 
 }

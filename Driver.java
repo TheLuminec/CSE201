@@ -18,15 +18,16 @@ public class Driver {
      */
     public static void main(String[] args) {
         input = new Scanner(System.in);
-        System.out.println("Enter your Name!");
-        String userName = input.nextLine();
+        new HangManPuzzle().triggerPuzzle();
+        // System.out.println("Enter your Name!");
+        // String userName = input.nextLine();
 
-        //makeStory();
-        testStory();
+        // //makeStory();
+        // testStory();
 
-        player = new Player(userName, 30, startRoom);
+        // player = new Player(userName, 30, startRoom);
 
-        run();
+        // run();
 
         input.close();
     }
