@@ -11,6 +11,7 @@ public final class HangManPuzzle extends Puzzle {
         generateWords();
         concealWords();
     }
+    
 
     @Override
     protected void generateWords() {
