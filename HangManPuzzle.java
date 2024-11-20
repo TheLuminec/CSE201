@@ -1,12 +1,15 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.random.RandomGenerator;
+
 
 public final class HangManPuzzle extends Puzzle {
     String words = "Temporary Puzzles Are Cool";
     String concealWords = "";
     int guessCount = 6;
+    ArrayList<Character> guessedChars = new ArrayList<>();
 
     public HangManPuzzle() {
         generateWords();
@@ -17,7 +20,7 @@ public final class HangManPuzzle extends Puzzle {
     @Override
     protected void generateWords() {
         try {
-            try (Scanner fileScanner = new Scanner(new File("words.txt"))) {
+            try (Scanner fileScanner = new Scanner(new File("wordss.txt"))) {
                 for (int i = -1; i < RandomGenerator.getDefault().nextInt(187404); i++) {
                     fileScanner.nextLine();
                 }
@@ -43,6 +46,7 @@ public final class HangManPuzzle extends Puzzle {
     // Have user do the puzzle
     @Override
     public boolean triggerPuzzle() {
+        System.out.println(Character.toUpperCase('s') == 'S');
         while(guessCount > 0) {
             if (concealWords.equals(words)) {
                 System.out.println("You solved the puzzle.");
@@ -63,24 +67,31 @@ public final class HangManPuzzle extends Puzzle {
         while(true) {
             System.out.println("Guess a letter: ");
             String input = Driver.getScanner().nextLine();
-            if (input.length() == 1 && input.charAt(0) != ' ') {
+            if (isValidInput(input)) {
                 return (processChar(input.charAt(0)));
                 // isValidInput = true;
             }
-            System.out.println("Please enter a valid character. (Ex: 'b')");
         }
+    }
+
+    private boolean isValidInput(String input) {
+        if (!(input.length() == 1 && input.charAt(0) != ' ')) {
+            System.out.println("Please enter a valid character. (Ex: 'b')");
+            return false;
+        } else if (guessedChars.contains(input.charAt(0))) {
+            System.out.println("You've already guessed this character!");
+            return false;
+        }
+        return true;
     }
 
     private boolean processChar(char ch) {
         char[] letters = concealWords.toCharArray();
         boolean letterFound = false;
+        guessedChars.add(ch);
         for (int i = 0; i < concealWords.length(); i++) {
-            if (words.charAt(i) == ch) {
-                letters[i] = ch;
-                letterFound = true;
-            }
-            if (words.charAt(i) == Character.toUpperCase(ch)) {
-                letters[i] = Character.toUpperCase(ch);
+            if (words.charAt(i) == ch || Character.toUpperCase(words.charAt(i)) == ch || words.charAt(i) == Character.toUpperCase(ch)) {
+                letters[i] = words.charAt(i);
                 letterFound = true;
             }
         }
