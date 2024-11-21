@@ -12,17 +12,15 @@ public final class GuessWordPuzzle extends Puzzle {
 
     public GuessWordPuzzle() {
         generateWords();
-    }
-
-    private void generateDescription() {
-        
+        // Filler description
+        description = "you do filter-something-something tbd";
     }
 
     @Override
     protected void generateWords() {
         try {
             try (Scanner fileScanner = new Scanner(new File("words.txt"))) {
-                for (int i = -1; i < RandomGenerator.getDefault().nextInt(187404); i++) {
+                for (int i = 0; i < RandomGenerator.getDefault().nextInt(187403); i++) {
                     fileScanner.nextLine();
                 }
                 word = fileScanner.nextLine();

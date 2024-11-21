@@ -14,6 +14,8 @@ public final class HangManPuzzle extends Puzzle {
     public HangManPuzzle() {
         generateWords();
         concealWords();
+        // Filler description
+        description = "You find a something-something puzzle thing";
     }
     
 
