@@ -21,8 +21,8 @@ public class Driver {
         System.out.println("Enter your Name!");
         String userName = input.nextLine();
 
-        //makeStory();
-        testStory();
+        makeStory();
+        //testStory();
 
         player = new Player(userName, 30, startRoom);
 
@@ -40,7 +40,7 @@ public class Driver {
         while(true) {
             Room currRoom = player.getRoom();
             if(player.timeIsUp()) {
-                System.out.println("Game Over!");
+                System.out.println("Game Over! \n You took too long to fix the purifier. Your vision slowly fades to black as you suffocate. You wake up in New Jersey five hours later. You should probably lay off the benadryl for a while");
                 break;
             }
 
@@ -71,125 +71,130 @@ public class Driver {
             System.out.println("You lost " + player.getName() + "!");
     }
 
-    private static void testStory() {
-        rooms = new ArrayList<>();
-        Room testroom = new Room("Testroom", "This is an example test room");
-        rooms.add(testroom);
-        startRoom = testroom;
-
-        testroom.addOption(new Option("Take item", "you took the item", 5));
-        testroom.lastSetItems("item1");
-        testroom.lastSetFlags("this is a flag");
-
-        testroom.addOption(new Option("Use item", "you used the item"));
-        testroom.lastNeedItems("item1");
-        testroom.lastSetFlags("gameEnd");
-
-    }
-
     /**
      * Sets up the game story by creating rooms and their respective options.
      */
     private static void makeStory() {//example
+        System.out.println("You wake up on your spaceship to a blaring alarm repeating \"the air purification system is damaged. Proceed to the purification room to do further diagnostics.\"");
         rooms = new ArrayList<>();
-        Room bedroom = new Room("Bedroom", "there are things in here, bedroom");
-        Room closet = new Room("Closet", "closet (hammer)");
-        Room hallway = new Room("Hallway", "hallway stuff");
-        Room storage = new Room("Storage", "storage stuff");
-        Room purifier = new Room("Purifier", "purifier stuff");
-        Room controlRoom = new Room("Control Room", "control stuff");
-
-
+        Room bedroom = new Room("Bedroom", "You look around your bedroom and see,");
+        Room closet = new Room("Closet", "You look in the closet and see,");
+        Room hallway = new Room("Hallway", "You walk into the hallway and see red lights flashing,");
+        Room storage = new Room("Storage", "You are at the storage room,");
+        Room purifier = new Room("Purifier", "You see the air purifier straight ahead,");
+        Room controlRoom = new Room("Control Room", "You enter the main control room and see,");
         rooms.add(bedroom);
         rooms.add(closet);
         rooms.add(hallway);
         rooms.add(storage);
         rooms.add(purifier);
         rooms.add(controlRoom);
-
-
-        bedroomStory(bedroom);
-        closetStory(closet);
-        hallwayStory(hallway);
-        storageStory(storage);
-        purifierStory(purifier);
-        controlRoom(controlRoom);
-    
-
         startRoom = bedroom;
-    }
 
-    /**
-     * Defines the options and flags for the bedroom.
-     *
-     * @param bedroom The bedroom room object.
-     */
-    private static void bedroomStory(Room bedroom) {
-        // bedroom.addOption(new Option(null, flags("hasMissile"), "missile", "can pick up missile"));
-        // bedroom.addOption(new Option(null, null, "closet", "go to closet"));
-        // bedroom.addOption(new Option(null, flags("alarmVisit"), "clock", "go to clock"));
-        // bedroom.addOption(new Option(flags("alarmVisit"), flags("hasBatteries"), "break clock", "break clock + battery"));
-        // bedroom.addOption(new Option(null, null, "leave", "leave hallway", rooms.get(2)));
 
-    }
+        //Bedroom choices, and closet
+        bedroom.addOption(new Option("Go back to sleep. You're sure the problem will sort itself out.", 
+        "You die, in your sleep slowly suffocating.", 100));
+        bedroom.lastSetFlags("gameEnd");
 
-    /**
-     * Defines the options and flags for the closet.
-     *
-     * @param closet The closet room object.
-     */
-    private static void closetStory(Room closet) {
-        // closet.addOption(new Option(null, null, "leave", "leave closet", rooms.get(0)));
-        // closet.addOption(new Option(null, flags("hasHammer"), "hammer", "hammer get"));
-        // closet.addOption(new Option(null, null, "clothes", "clothes"));
-    }
-    
-    /**
-     * Defines the options and flags for the hallway.
-     *
-     * @param hallway The hallway room object.
-     */
-    private static void hallwayStory(Room hallway) {
-        // hallway.addOption(new Option(null, null, "bedroom leave", "go bedroom", rooms.get(0)));
-        // hallway.addOption(new Option(null, null, "broken storage", "see Storage", rooms.get(3)));
-        // hallway.addOption(new Option(null, null, "purifier leave", "go purifier", rooms.get(4)));
-        // hallway.addOption(new Option(null, null, "control room leave", "go control room", rooms.get(5)));
-    }
+        bedroom.addOption(new Option("You inspect the missile and notice that it is still live and functional.",
+        "You take the missile somehow carrying it."));
+        bedroom.lastSetItems("missle");
 
-    /**
-     * Defines the options and flags for the storage room.
-     *
-     * @param purifier The storage room object.
-     */ 
-    private static void storageStory(Room storage) {
-        // storage.addOption(new Option(flags("hasMissile"), flags("gameEnd"), "missile", "Death by missile"));
-        // storage.addOption(new Option(flags("hasBatteries"), flags("openRoom"), "hammer", "Door open"));
-        // storage.addOption(new Option(null, null, "leave", "leave room", rooms.get(2)));
-    }
+        bedroom.addOption(new Option("You see a door leading to the closet.", 
+        "You enter the closet.", 2, closet));
 
-    /**
-     * Defines the options and flags for the purifier room.
-     *
-     * @param purifier The purifier room object.
-     */ 
-    private static void purifierStory(Room purifier) {
-        // purifier.addOption(new Option(null, null, "control panel", "control info"));
-        // purifier.addOption(new Option(null, flags("gameEnd"), "fix air purifier", "Congrats! You fixed the air purifier!"));
-        // purifier.addOption(new Option(null, null, "filter panel", "filter gain"));
-        // purifier.addOption(new Option(null, null, "leave", "leave purifier", rooms.get(2)));
-    }
+        closet.addOption(new Option("You see a sledgehammer you could take it.", 
+        "You pick up the sledgehammer.", 2));
+        closet.lastSetItems("sledgehammer");
+        closet.addOption(new Option("Get dressed.", "You look extraordinarily dapper.", -8));
+        closet.addOption(new Option("Leave closet.", "You leave the closet.", 1, bedroom));
 
-    /**
-     * Defines the options and flags for the control room.
-     *
-     * @param purifier The control room object.
-     */ 
-    private static void controlRoom(Room controlRoom) {
-        // controlRoom.addOption(new Option(null, null, "view console", "console info"));
-        // controlRoom.addOption(new Option(null, flags("hasCard"), "key card", "keycard grab"));
-        // controlRoom.addOption(new Option(null, flags("hasFilter"), "filter gain", "filter gain"));
-        // controlRoom.addOption(new Option(null, null, "leave", "leave control room", rooms.get(2)));
+        bedroom.addOption(new Option("You see an alarm clock.", "It looks like you could break this."));
+        bedroom.lastSetFlags("alarmLook");
+        bedroom.addOption(new Option("You see an alarm clock that looks very breakable.", 
+        "You smash the alarm clock with your sledgehammer and some batteries fall out.", 3));
+        bedroom.lastNeedFlags("alarmLook");
+        bedroom.lastNeedItems("sledgehammer");
+        bedroom.lastSetItems("batteries");
 
+        bedroom.addOption(new Option("You see a door leading to the hallway", 
+        "You leave the bedroom.", 2, hallway));
+
+
+        //Hallway choices
+        hallway.addOption(new Option("You see a broken door leading to the storage room.", 
+        "The door does not seem to work.", 1, storage));
+
+        hallway.addOption(new Option("You see a door leading to the air purifier room.", 
+        "You enter the air purifier room.", 2, purifier));
+
+        hallway.addOption(new Option("You see a door leading to the main control room", 
+        "You enter the main control room.", 2, controlRoom));
+
+        //Control Room choices
+        controlRoom.addOption(new Option("You see a console with a warning message on it.", 
+        "The warning message on the console reads “Proceed to the air purifier room and remove the front panel. Internal rewiring is required”."));
+
+        controlRoom.addOption(new Option("You see a keycard hanging on the wall.", 
+        "You take the keycard."));
+        controlRoom.lastSetItems("keycard");
+
+        controlRoom.addOption(new Option("You see a new airpurifier.", 
+        "You pick it up but its very heavy.", 5));
+        controlRoom.lastNeedItems("airpurifier");
+
+        controlRoom.addOption(new Option("Leave the control room.", 
+        "You go back to the hallway.", 1, hallway));
+
+
+        //Storage
+        storage.addOption(new Option("You could blow up the door with the missle.", 
+        "You blow up the door but also put a hole in the side of your spaceship. You suffocate and die."));
+        storage.lastNeedItems("missle");
+        storage.lastSetFlags("gameEnd");
+
+        storage.addOption(new Option("You could replace the keycard readers batteries.", 
+        "You replace the batteries in the keycard reader and it turns on."));
+        storage.lastNeedItems("batteries");
+        storage.lastSetFlags("keycardReaderOn");
+
+        storage.addOption(new Option("You could use the keycard.", 
+        "You use the keycard and the storage room door opens."));
+        storage.lastNeedFlags("keycardReaderOn");
+        storage.lastNeedItems("keycard");
+        storage.lastSetFlags("doorOpen");
+
+        storage.addOption(new Option("You see a toolbox in the storage room.", 
+        "You take the toolbox."));
+        storage.lastNeedFlags("doorOpen");
+        storage.lastSetItems("toolbox");
+
+        //puzzle
+        storage.addOption(new Option("Would you like to guess the password?", 
+        "You somehow guess the password to the door."));
+        storage.lastNeedFlags("keycardReaderOn");
+        storage.lastSetFlags("doorOpen");
+
+        storage.addOption(new Option("Leave storage room.", 
+        "You go back to the hallway.", 1, hallway));
+
+        //Air Purifier
+        purifier.addOption(new Option("Leave air purifier room.", 
+        "You go back to the hallway.", 3, hallway));
+
+        purifier.addOption(new Option("Look at the purifier.", 
+        "You take a look and you can't fix it without a toolbox or new purifer."));
+
+        purifier.addOption(new Option("You use the screwdriver in your toolbox to take the front panel from the purifier.",
+         "You fix the air purifier! \n Congratulations! You successfully fixed the air purifier in time and didn’t die!"));
+        purifier.lastNeedItems("toolbox");
+        purifier.lastSetFlags("gameEnd");
+
+        purifier.addOption(new Option("You could try replacing the whole air purifier but it would be hard.", 
+        "You somehow install the new air purifier! \n Congratulations! You successfully fixed the air purifier in time and didn’t die!"));
+        purifier.lastNeedItems("airpurifier");
+        purifier.lastSetFlags("gameEnd");
 
     }
 
