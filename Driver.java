@@ -18,8 +18,6 @@ public class Driver {
      */
     public static void main(String[] args) {
         input = new Scanner(System.in);
-        // new HangManPuzzle().triggerPuzzle();
-        new GuessWordPuzzle().triggerPuzzle();
         System.out.println("Enter your Name!");
         String userName = input.nextLine();
 

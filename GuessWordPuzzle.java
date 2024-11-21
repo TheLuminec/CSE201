@@ -34,7 +34,7 @@ public final class GuessWordPuzzle extends Puzzle {
     public boolean triggerPuzzle() {
         System.out.println(getDescription());
         System.out.print("Input: ");
-        if(Driver.getScanner().nextLine().equals(word)) {
+        if(Driver.getScanner().nextLine().equalsIgnoreCase(word)) {
             System.out.println("Correct!\nYou guessed " + word + " correctly!");
             return true;
         }
