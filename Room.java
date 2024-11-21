@@ -39,15 +39,17 @@ public class Room {
             return false;
 
         Option opt = currentOptions.get(choice - 1);
-
-        triggerFlag(opt.triggerFlags());
-        System.out.println(opt.getResult());
-
-        currentOptions.clear();
         player.incrementTurnCounter(opt.getTurnCost());
-        
-        player.removeItems(opt.getNeededItems());
-        player.addItems(opt.getItems());
+
+        if(opt.triggerPuzzle()) {
+            triggerFlag(opt.triggerFlags());
+            System.out.println(opt.getResult());
+
+            currentOptions.clear();
+
+            player.removeItems(opt.getNeededItems());
+            player.addItems(opt.getItems());
+        }
         
         if (opt.getToRoom() != null)
             player.moveRoom(opt.getToRoom());

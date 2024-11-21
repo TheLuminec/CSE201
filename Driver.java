@@ -22,7 +22,6 @@ public class Driver {
         String userName = input.nextLine();
 
         makeStory();
-        //testStory();
 
         player = new Player(userName, 30, startRoom);
 
@@ -94,7 +93,7 @@ public class Driver {
 
         //Bedroom choices, and closet
         bedroom.addOption(new Option("Go back to sleep. You're sure the problem will sort itself out.", 
-        "You die, in your sleep slowly suffocating.", 100));
+        "You took too long to fix the purifier. Your vision slowly fades to black as you suffocate. You wake up in New Jersey five hours later. You should probably lay off the benadryl for a while.", 100));
         bedroom.lastSetFlags("gameEnd");
 
         bedroom.addOption(new Option("You inspect the missile and notice that it is still live and functional.",
@@ -122,6 +121,7 @@ public class Driver {
         "You leave the bedroom.", 2, hallway));
 
 
+
         //Hallway choices
         hallway.addOption(new Option("You see a broken door leading to the storage room.", 
         "The door does not seem to work.", 1, storage));
@@ -131,6 +131,7 @@ public class Driver {
 
         hallway.addOption(new Option("You see a door leading to the main control room", 
         "You enter the main control room.", 2, controlRoom));
+
 
         //Control Room choices
         controlRoom.addOption(new Option("You see a console with a warning message on it.", 
@@ -142,15 +143,16 @@ public class Driver {
 
         controlRoom.addOption(new Option("You see a new airpurifier.", 
         "You pick it up but its very heavy.", 5));
-        controlRoom.lastNeedItems("airpurifier");
+        controlRoom.lastSetItems("airpurifier");
 
         controlRoom.addOption(new Option("Leave the control room.", 
         "You go back to the hallway.", 1, hallway));
 
 
+
         //Storage
         storage.addOption(new Option("You could blow up the door with the missle.", 
-        "You blow up the door but also put a hole in the side of your spaceship. You suffocate and die."));
+        "You blow up the door but also put a hole in the side of your spaceship. You suffocate and die.", 100));
         storage.lastNeedItems("missle");
         storage.lastSetFlags("gameEnd");
 
@@ -172,12 +174,13 @@ public class Driver {
 
         //puzzle
         storage.addOption(new Option("Would you like to guess the password?", 
-        "You somehow guess the password to the door."));
+        "You somehow guess the password to the door.", 1, new GuessWordPuzzle()));
         storage.lastNeedFlags("keycardReaderOn");
         storage.lastSetFlags("doorOpen");
 
         storage.addOption(new Option("Leave storage room.", 
         "You go back to the hallway.", 1, hallway));
+
 
         //Air Purifier
         purifier.addOption(new Option("Leave air purifier room.", 
@@ -192,7 +195,7 @@ public class Driver {
         purifier.lastSetFlags("gameEnd");
 
         purifier.addOption(new Option("You could try replacing the whole air purifier but it would be hard.", 
-        "You somehow install the new air purifier! \n Congratulations! You successfully fixed the air purifier in time and didn’t die!"));
+        "You somehow install the new air purifier! \n Congratulations! You successfully fixed the air purifier in time and didn’t die!", 1, new HangManPuzzle()));
         purifier.lastNeedItems("airpurifier");
         purifier.lastSetFlags("gameEnd");
 

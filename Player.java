@@ -71,6 +71,6 @@ public class Player extends Inventory {
     }
 
     public double getScore() {
-        return Math.sqrt((MAX_TURNS-turnCounter)*(MAX_TURNS-turnCounter) * Math.E);
+        return (MAX_TURNS-turnCounter) * Math.E;
     }
 }
