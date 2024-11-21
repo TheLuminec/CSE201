@@ -20,8 +20,8 @@ public final class HangManPuzzle extends Puzzle {
     @Override
     protected void generateWords() {
         try {
-            try (Scanner fileScanner = new Scanner(new File("wordss.txt"))) {
-                for (int i = -1; i < RandomGenerator.getDefault().nextInt(187404); i++) {
+            try (Scanner fileScanner = new Scanner(new File("hangman.txt"))) {
+                for (int i = 0; i < RandomGenerator.getDefault().nextInt(98); i++) {
                     fileScanner.nextLine();
                 }
                 words = fileScanner.nextLine();
@@ -69,7 +69,6 @@ public final class HangManPuzzle extends Puzzle {
             String input = Driver.getScanner().nextLine();
             if (isValidInput(input)) {
                 return (processChar(input.charAt(0)));
-                // isValidInput = true;
             }
         }
     }
@@ -78,7 +77,8 @@ public final class HangManPuzzle extends Puzzle {
         if (!(input.length() == 1 && input.charAt(0) != ' ')) {
             System.out.println("Please enter a valid character. (Ex: 'b')");
             return false;
-        } else if (guessedChars.contains(input.charAt(0))) {
+        } else if (guessedChars.contains(input.charAt(0)) 
+            || guessedChars.contains(Character.toUpperCase(input.charAt(0)))) {
             System.out.println("You've already guessed this character!");
             return false;
         }
@@ -90,7 +90,7 @@ public final class HangManPuzzle extends Puzzle {
         boolean letterFound = false;
         guessedChars.add(ch);
         for (int i = 0; i < concealWords.length(); i++) {
-            if (words.charAt(i) == ch || Character.toUpperCase(words.charAt(i)) == ch || words.charAt(i) == Character.toUpperCase(ch)) {
+            if (Character.toUpperCase(words.charAt(i)) == Character.toUpperCase(ch)) {
                 letters[i] = words.charAt(i);
                 letterFound = true;
             }
