@@ -15,6 +15,7 @@ public class Option {
     private boolean isDone = false;
     private int turnCost;
     private Room toRoom;
+    private Puzzle puzzle;
 
     /**
      * Default constructor for a basic option
@@ -56,6 +57,30 @@ public class Option {
         this.toRoom = room;
     }
 
+    /**
+     * Constructor for Puzzle requirements
+     * @param description the description of the option
+     * @param result the result of the option
+     * @param turnCost the turn cost of the option
+     * @param room the room to move to after choosing this option
+     */
+    public Option(String description, String result, int turnCost, Puzzle puzzle) {
+        this(description, result, turnCost);
+        this.puzzle = puzzle;
+    }
+    
+    /**
+     * Triggers the puzzle associated with this option.
+     * 
+     * @return True if solved, false if no puzzle or failed puzzle.
+     */
+    public boolean triggerPuzzle() {
+        if (puzzle == null) {
+            return true; 
+        } else {
+            return puzzle.triggerPuzzle();
+        }
+    }
     /**
      * Triggers the flags associated with this option.
      *
