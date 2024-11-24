@@ -11,11 +11,11 @@ public final class HangManPuzzle extends Puzzle {
     int guessCount = 6;
     ArrayList<Character> guessedChars = new ArrayList<>();
 
-    public HangManPuzzle() {
+    public HangManPuzzle(String deString) {
         generateWords();
         concealWords();
         // Filler description
-        description = "You find a something-something puzzle thing";
+        description = deString;
     }
     
 
@@ -48,7 +48,7 @@ public final class HangManPuzzle extends Puzzle {
     // Have user do the puzzle
     @Override
     public boolean triggerPuzzle() {
-        System.out.println(Character.toUpperCase('s') == 'S');
+        System.out.println(description);
         while(guessCount > 0) {
             if (concealWords.equals(words)) {
                 System.out.println("You solved the puzzle.");

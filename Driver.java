@@ -39,7 +39,7 @@ public class Driver {
         while(true) {
             Room currRoom = player.getRoom();
             if(player.timeIsUp()) {
-                System.out.println("Game Over! \n You took too long to fix the purifier. Your vision slowly fades to black as you suffocate. You wake up in New Jersey five hours later. You should probably lay off the benadryl for a while");
+                System.out.println("Game Over! \n You took too long to fix the purifier. Your vision slowly fades to black as you suffocate. You wake up in New Jersey five hours later. You should probably lay off the benadryl for a while.");
                 break;
             }
 
@@ -51,7 +51,7 @@ public class Driver {
                 System.out.println("Invalid Option! Please enter a number.");
                 continue;
             }
-            
+            System.out.println();
             if(currRoom.chooseOption(choice, player)) {
                 if(currRoom.hasFlag("gameEnd")) {
                     break;
@@ -79,7 +79,7 @@ public class Driver {
         Room bedroom = new Room("Bedroom", "You look around your bedroom and see,");
         Room closet = new Room("Closet", "You look in the closet and see,");
         Room hallway = new Room("Hallway", "You walk into the hallway and see red lights flashing,");
-        Room storage = new Room("Storage", "You are at the storage room,");
+        Room storage = new Room("Storage", "You are in the storage room,");
         Room purifier = new Room("Purifier", "You see the air purifier straight ahead,");
         Room controlRoom = new Room("Control Room", "You enter the main control room and see,");
         rooms.add(bedroom);
@@ -89,7 +89,7 @@ public class Driver {
         rooms.add(purifier);
         rooms.add(controlRoom);
         startRoom = bedroom;
-
+        player.addItem("brokenDoor");
 
         //Bedroom choices, and closet
         bedroom.addOption(new Option("Go back to sleep. You're sure the problem will sort itself out.", 
@@ -135,13 +135,13 @@ public class Driver {
 
         //Control Room choices
         controlRoom.addOption(new Option("You see a console with a warning message on it.", 
-        "The warning message on the console reads “Proceed to the air purifier room and remove the front panel. Internal rewiring is required”."));
+        "The warning message on the console reads \"Proceed to the air purifier room and remove the front panel. Internal rewiring is required\"."));
 
         controlRoom.addOption(new Option("You see a keycard hanging on the wall.", 
         "You take the keycard."));
         controlRoom.lastSetItems("keycard");
 
-        controlRoom.addOption(new Option("You see a new airpurifier.", 
+        controlRoom.addOption(new Option("You see a new air purifier, its heavy and would take a while to install.", 
         "You pick it up but its very heavy.", 5));
         controlRoom.lastSetItems("airpurifier");
 
@@ -153,18 +153,18 @@ public class Driver {
         //Storage
         storage.addOption(new Option("You could blow up the door with the missle.", 
         "You blow up the door but also put a hole in the side of your spaceship. You suffocate and die.", 100));
-        storage.lastNeedItems("missle");
+        storage.lastNeedItems("missle", "brokenDoor");
         storage.lastSetFlags("gameEnd");
 
         storage.addOption(new Option("You could replace the keycard readers batteries.", 
         "You replace the batteries in the keycard reader and it turns on."));
-        storage.lastNeedItems("batteries");
+        storage.lastNeedItems("batteries", "brokenDoor");
         storage.lastSetFlags("keycardReaderOn");
 
         storage.addOption(new Option("You could use the keycard.", 
         "You use the keycard and the storage room door opens."));
         storage.lastNeedFlags("keycardReaderOn");
-        storage.lastNeedItems("keycard");
+        storage.lastNeedItems("keycard", "brokenDoor");
         storage.lastSetFlags("doorOpen");
 
         storage.addOption(new Option("You see a toolbox in the storage room.", 
@@ -173,9 +173,11 @@ public class Driver {
         storage.lastSetItems("toolbox");
 
         //puzzle
-        storage.addOption(new Option("Would you like to guess the password?", 
-        "You somehow guess the password to the door.", 1, new GuessWordPuzzle()));
+        storage.addOption(new Option("You could guess the password.", 
+        "You somehow guess the password to the door.", 
+        2, new GuessWordPuzzle("Guess the password! It could be any word you probbably can't guess it.")));
         storage.lastNeedFlags("keycardReaderOn");
+        storage.lastNeedItems("brokenDoor");
         storage.lastSetFlags("doorOpen");
 
         storage.addOption(new Option("Leave storage room.", 
@@ -190,12 +192,14 @@ public class Driver {
         "You take a look and you can't fix it without a toolbox or new purifer."));
 
         purifier.addOption(new Option("You use the screwdriver in your toolbox to take the front panel from the purifier.",
-         "You fix the air purifier! \n Congratulations! You successfully fixed the air purifier in time and didn’t die!"));
+         "You fix the air purifier! \n Congratulations! You successfully fixed the air purifier in time and didn\'t die!", 
+         5, new HangManPuzzle("The wiring is difficult, solve the puzzle to fix the air purifier!")));
         purifier.lastNeedItems("toolbox");
         purifier.lastSetFlags("gameEnd");
 
         purifier.addOption(new Option("You could try replacing the whole air purifier but it would be hard.", 
-        "You somehow install the new air purifier! \n Congratulations! You successfully fixed the air purifier in time and didn’t die!", 1, new HangManPuzzle()));
+        "You somehow install the new air purifier! \n Congratulations! You successfully fixed the air purifier in time and didn\'t die!", 
+        10, new GuessWordPuzzle("The air purifier looks hard to install, you'd have to get lucky.")));
         purifier.lastNeedItems("airpurifier");
         purifier.lastSetFlags("gameEnd");
 

@@ -97,7 +97,7 @@ public class Option {
      * @return True if the option is done, false otherwise.
      */
     public boolean getIsDone() {
-        if (toRoom != null)
+        if (toRoom != null || puzzle != null)
             return false;
         return isDone;
     }

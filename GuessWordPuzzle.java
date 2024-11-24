@@ -10,10 +10,10 @@ public final class GuessWordPuzzle extends Puzzle {
     // Default word
     String word = "spaghetti";
 
-    public GuessWordPuzzle() {
+    public GuessWordPuzzle(String deString) {
         generateWords();
         // Filler description
-        description = "you do filter-something-something tbd";
+        description = deString;
     }
 
     @Override
@@ -32,6 +32,7 @@ public final class GuessWordPuzzle extends Puzzle {
 
     @Override
     public boolean triggerPuzzle() {
+        Driver.getScanner().nextLine();
         System.out.println(getDescription());
         System.out.print("Guess the word I'm thinking of: ");
         if(Driver.getScanner().nextLine().equalsIgnoreCase(word)) {
