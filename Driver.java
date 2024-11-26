@@ -24,6 +24,7 @@ public class Driver {
         makeStory();
 
         player = new Player(userName, 30, startRoom);
+        player.addItem("brokenDoor");
 
         run();
 
@@ -89,7 +90,6 @@ public class Driver {
         rooms.add(purifier);
         rooms.add(controlRoom);
         startRoom = bedroom;
-        player.addItem("brokenDoor");
 
         //Bedroom choices, and closet
         bedroom.addOption(new Option("Go back to sleep. You're sure the problem will sort itself out.", 
@@ -158,7 +158,7 @@ public class Driver {
 
         storage.addOption(new Option("You could replace the keycard readers batteries.", 
         "You replace the batteries in the keycard reader and it turns on."));
-        storage.lastNeedItems("batteries", "brokenDoor");
+        storage.lastNeedItems("batteries");
         storage.lastSetFlags("keycardReaderOn");
 
         storage.addOption(new Option("You could use the keycard.", 

@@ -1,109 +1,120 @@
-# Text Adventure Game
+# Jump in 77: A Text-Based Space Adventure Game
 
-This is a simple text-based adventure game developed for the CSE201 class project. In this game, you navigate through different rooms, interact with objects, and make choices that affect the outcome. You have a limited number of turns to complete the game, so plan your actions wisely!
+Welcome to **Jump in 77**, a text-based adventure game developed by the D Group for the CSE201 course final project. In this game, you'll step into the role of a space traveler waking up to a critical situation aboard your spaceship. The air purification system has malfunctioned, and if you don't act quickly, you'll run out of air. Can you repair the system in time and survive?
 
 ## Table of Contents
-
-- [Features](#features)
+- [Overview](#overview)
+- [Game Features](#game-features)
 - [How to Play](#how-to-play)
 - [Game Mechanics](#game-mechanics)
-- [Class Structure](#class-structure)
-- [Contributing](#contributing)
+- [Scoring System](#scoring-system)
+- [Development Details](#development-details)
 
-## Features
+---
 
-- **Interactive Storyline**: Explore different rooms and uncover the story through your choices.
-- **Multiple Rooms**: Navigate through the Bedroom, Closet, Hallway, Storage, Purifier, and Control Room.
-- **Choice-Based Outcomes**: Your decisions trigger flags that open up new options or endings.
-- **Turn-Based System**: You have a limited number of turns (default is 30) to complete the game.
-- **Simple Interface**: Text-based interaction that's easy to use.
+## Overview
+
+**Game Name**: Jump in 77  
+**Programming Language**: Java  
+
+### Premise
+You are a solo space traveler aboard a ship in deep space. One morning, you're startled awake by a blaring alarm: the air purification system is malfunctioning. If you fail to fix it in time, you will run out of breathable air. 
+
+The game revolves around exploration and decision-making. With a limited number of moves, you must explore the spaceship, collect items, solve puzzles, and repair the system—all before running out of time.
+
+---
+
+## Game Features
+
+- **Interactive Storyline**  
+  Immerse yourself in a sci-fi scenario where every choice impacts your survival.
+  
+- **Exploration**  
+  Navigate through interconnected rooms, including the Bedroom, Closet, Hallway, Storage, Purifier, and Control Room.
+
+- **Inventory Management**  
+  Pick up, store, and use items critical for progressing through the game.
+
+- **Puzzle Solving**  
+  Solve engaging puzzles, such as Hangman and word guessing, to unlock progress.
+
+- **Dynamic Time Limit**  
+  Manage a turn-based countdown that simulates the urgency of fixing the air purifier.
+
+- **Outcome-Based Scoring**  
+  Earn a score based on your efficiency and survival.
+
+---
 
 ## How to Play
 
-1. **Start the Game**
+1. **Run the Game**  
+   Execute the program using:
+   ```bash
+   java Driver
+   ```
 
-   When you run `java Driver`, the game will start and prompt you to enter your name.
+2. **Enter Your Name**  
+   Start by typing your name when prompted.
 
-2. **Enter Your Name**
+3. **Explore**  
+   Move between rooms, read descriptions, and interact with available options.
 
-   Type your name and press `Enter`.
+4. **Choose Actions**  
+   - Options will be displayed as a numbered list.
+   - Enter the corresponding number to select your choice.
 
-3. **Read the Descriptions**
+5. **Manage Your Inventory**  
+   - Pick up items in the rooms you explore.
+   - Use items to unlock specific actions or solve puzzles.
 
-   The game will display descriptions of the rooms you enter and the options available.
+6. **Solve Puzzles**  
+   - Engage in challenges such as Hangman or word guessing to progress through the game.
 
-4. **Make Choices**
+7. **Repair the Air Purifier**  
+   - Find tools and solutions to fix the purifier before time runs out.
 
-   - Options will be presented in a numbered list.
-   - Type the number corresponding to your choice and press `Enter`.
-   - If you enter an invalid option, the game will prompt you to try again.
+8. **Achieve Victory or Face Defeat**  
+   - Your outcome depends on your choices, puzzle-solving ability, and resource management.
 
-5. **Interact with Objects**
-
-   - Some options may involve picking up items or interacting with objects.
-   - Your actions may trigger flags that unlock new options or rooms.
-
-6. **Manage Your Turns**
-
-   - Each action consumes a turn.
-   - You have a limited number of turns to complete the game.
-   - The game ends when you run out of turns or reach an ending condition.
-
-7. **Explore and Enjoy**
-
-   - Navigate through different rooms.
-   - Make strategic decisions to reach the best possible outcome.
+---
 
 ## Game Mechanics
 
-- **Rooms**
+- **Rooms and Navigation**
+  - Each room has unique descriptions and options.
+  - Move through rooms by selecting the appropriate choices.
 
-  - **Bedroom**: Your starting point.
-  - **Closet**: Connected to the bedroom.
-  - **Hallway**: Central hub leading to other rooms.
-  - **Storage**: Contains important items or events.
-  - **Purifier**: Holds crucial game elements.
-  - **Control Room**: Possible endgame location.
+- **Time Limit**
+  - The game uses a turn-based countdown system.
+  - Every action reduces your remaining turns.
 
-- **Options**
+- **Flags and Items**
+  - Certain actions set "flags" that unlock new options or interactions.
+  - Collected items allow you to perform specific tasks, such as repairing systems or opening doors.
 
-  - Each room presents several options.
-  - Options may require certain conditions (flags) to be available.
-  - Choosing an option can trigger flags, consume turns, and possibly change your location.
+- **Puzzles**
+  - Solve puzzles integrated into the storyline to progress and succeed in your mission.
+  - Examples include guessing a password or completing a Hangman challenge.
 
-- **Flags**
+---
 
-  - Flags represent the game's state and track your progress.
-  - Actions can set flags that unlock new options or affect outcomes.
-  - Examples include `hasHammer`, `gameEnd`, `alarmVisit`, etc.
+## Scoring System
 
-- **Turn Counter**
+At the end of the game, your score reflects:
+1. **Success**: Whether you repaired the air purifier in time.
+2. **Efficiency**: How many moves you had left upon completing the game.  
 
-  - You start with a maximum number of turns (default is 30).
-  - Each action reduces your remaining turns.
-  - The game ends when you have no turns left.
+---
 
-## Class Structure
+## Development Details
 
-- **Driver.java**
+**Group Members**:
+- Ben Zazycki
+- Emma Sundquist
+- Brian Mackintosh
+- Caleb Turner
+- Collin Wise
+- Joey Valeski
 
-  - The main class that initializes the game.
-  - Handles user input and the game loop.
-  - Creates rooms and sets up the story.
-
-- **Player.java**
-
-  - Represents the player character.
-  - Tracks the player's name, current room, inventory (if implemented), and turn counter.
-
-- **Room.java**
-
-  - Represents a location in the game.
-  - Contains descriptions, options, and flags.
-  - Manages available options based on flags.
-
-- **Option.java**
-
-  - Represents an actionable choice in a room.
-  - Contains conditions (flags needed), effects (flags triggered), descriptions, and results.
-  - May lead to other rooms or change the game state.
+---
