@@ -11,7 +11,7 @@ import java.util.random.RandomGenerator;
  */
 public final class HangManPuzzle extends Puzzle {
 
-    // The default words for users to guess.
+    // The default words for users to solve.
     String words = "Temporary Puzzles Are Cool";
 
     // The concealed version of the words that the user sees.  

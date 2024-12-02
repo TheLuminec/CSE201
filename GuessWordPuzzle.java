@@ -37,7 +37,7 @@ public final class GuessWordPuzzle extends Puzzle {
         }
     }
 
-    // Triggers the word guessing Puzzle.
+    // Triggers the Word Guessing Puzzle.
     @Override
     public boolean triggerPuzzle() {
         Driver.getScanner().nextLine();
