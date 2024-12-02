@@ -5,15 +5,22 @@ import java.util.Scanner;
 import java.util.random.RandomGenerator;
 
 
-
+/**
+ * The class representing a word guessing puzzle.
+ * Players will attempt to guess a random word chosen from a file.
+ */
 public final class GuessWordPuzzle extends Puzzle {
+
     // Default word
     String word = "spaghetti";
 
-    public GuessWordPuzzle(String deString) {
+    /**
+     * The constructor for a GuessWordPuzzle object.
+     * @param descString The description of the puzzle.
+     */
+    public GuessWordPuzzle(String descString) {
         generateWords();
-        // Filler description
-        description = deString;
+        description = descString;
     }
 
     @Override
@@ -30,6 +37,7 @@ public final class GuessWordPuzzle extends Puzzle {
         }
     }
 
+    // Triggers the word guessing Puzzle.
     @Override
     public boolean triggerPuzzle() {
         Driver.getScanner().nextLine();
@@ -43,7 +51,5 @@ public final class GuessWordPuzzle extends Puzzle {
 
         return false;
     }
-
-
 
 }
